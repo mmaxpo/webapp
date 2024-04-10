@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  webapp:
+    restart: always
+    build: .
+    command: >
+      bash -c "python3 manage.py migrate &&
+               echo \"from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser('admin', 'admin@example.com', 'pass') if not User.objects.filter(username='admin').exists() else print('Superuser already exists.')\" | python3 manage.py shell &&
+               python3 manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_NAME=postgres
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=postgres
+      - DB_HOST=postgres
+      - DB_PORT=5432
+    volumes:
+      - .:/webapp
+      - static:/webapp/static
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+
+  postgres:
+    restart: always
+    image: postgres:12.18-alpine3.18
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
+  static:
+
+

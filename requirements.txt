@@ -1,0 +1,7 @@
+asgiref==3.7.2
+Django==4.2.11
+pillow==10.2.0
+tzdata
+psycopg2-binary==2.8.6
+sqlparse==0.4.4
+typing_extensions==4.10.0

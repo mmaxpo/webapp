@@ -1,0 +1,31 @@
+{% load post %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Post List</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+<body>
+<h2>Post List</h2>
+<h4>Hello User : </h4> <h2>{{request.user.username}}</h2>
+{% for comment in comments %}
+    <p><a href="{% url 'detail' comment.id %}" >{{ comment.body }}</a>
+</p>
+{% endfor %}
+{% for img in image %}
+    <img src="{{ img.image.url }}">
+    <p>{{ img.image.url }}</p>
+    <p>{{ img.date_posted }}</p>
+    <p>{{ img.post }}</p>
+{% endfor %}
+
+
+<h2>Post Auther</h2>
+{% post_auther as posts %}
+{% for post in posts %}
+    <p>{{ post.author|capfirst }}</p>
+{% endfor %}
+</body>
+</html>
