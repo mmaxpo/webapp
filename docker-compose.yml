@@ -9,6 +9,7 @@ services:
                python3 manage.py collectstatic --noinput &&
                python3 manage.py runserver 0.0.0.0:8000"
     environment:
+      - DJANGO_DEBUG=False
       - DB_NAME=postgres
       - DB_USERNAME=postgres
       - DB_PASSWORD=postgres
