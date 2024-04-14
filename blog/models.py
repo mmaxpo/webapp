@@ -3,6 +3,7 @@ from django.db import models
 
 User = get_user_model()
 
+
 class Auther(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField()

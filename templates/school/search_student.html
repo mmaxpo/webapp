@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="get">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Search</button>
+    </form>
+    <h2>Result</h2>
+    {% for st in results %}
+        <li>{{ st.name }}-{{ st.date_of_birth }}</li>
+        {% empty %}
+        <p>No Student Found</p>
+    {% endfor %}
+{% endblock %}

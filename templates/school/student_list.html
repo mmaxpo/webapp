@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for st in students %}
+        <a href="{% url 'student_details' st.id %}">{{ st.name }}</a>
+        <p><a href="{% url 'remove_student' st.id %}">Remove</a></p>
+        <p>{{ st.date_of_birth }}</p>
+    {% endfor %}
+    <a href="{% url 'register_student' %}">Register</a>
+{% endblock %}
